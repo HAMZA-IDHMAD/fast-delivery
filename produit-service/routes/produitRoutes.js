@@ -32,8 +32,7 @@ router.patch('/:id/stock', authenticate, checkRole('admin'), async (req, res) =>
   try {
     const produit = await Produit.findByIdAndUpdate(
       req.params.id,
-      { stock: req.body.stock },
-      { new: true, runValidators: true }
+      { stock: req.body.stock }
     );
     if (!produit) {
       return res.status(404).send();

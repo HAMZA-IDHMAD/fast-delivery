@@ -4,10 +4,10 @@ const Livraison = require('../models/Livraison');
 const axios = require('axios');
 const { authenticate, checkRole } = require('../middleware/authMiddleware');
 
-// Add new delivery (admin only)
+
 router.post('/ajouter', authenticate, checkRole('admin'), async (req, res) => {
   try {
-    // Verify order exists
+   
     await axios.get(`http://localhost:3002/commande/${req.body.commande_id}`, {
       headers: {
         Authorization: req.header('Authorization')
@@ -25,10 +25,10 @@ router.post('/ajouter', authenticate, checkRole('admin'), async (req, res) => {
   }
 });
 
-// Update delivery status (delivery person or admin)
+
 router.put('/:id', authenticate, async (req, res) => {
   try {
-    // Only allow delivery person assigned to this delivery or admin
+    
     const livraison = await Livraison.findById(req.params.id);
     
     if (!livraison) {
@@ -42,7 +42,7 @@ router.put('/:id', authenticate, async (req, res) => {
     const updatedLivraison = await Livraison.findByIdAndUpdate(
       req.params.id,
       { statut: req.body.statut },
-      { new: true, runValidators: true }
+      
     );
     
     res.send(updatedLivraison);

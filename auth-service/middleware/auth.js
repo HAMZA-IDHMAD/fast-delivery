@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Make sure this is the correct path
+const User = require('../models/User'); 
 
 module.exports = async (req, res, next) => {
   try {
